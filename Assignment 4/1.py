@@ -94,6 +94,19 @@ while 1:
         #Update the value at the current grid point
         Ap = Aw + Ae
         pp[i][j] = (Aw*pp[i][j-1]+Ae*pp[i][j+1]+b)/Ap
+    for j in range(1, nx):
+      pp[0][j] = pp[1][j]
+      pp[ny][j] = pp[1][j]
+    for i in range(0,ny+1):
+      pp[i][0] = pp[i][1]
+      
+      Aw = rho*d[i][nx-1]*dy
+      b = bm[i][nx]
+      #Update the value at the current grid point
+      Ap = Aw
+      
+      pp[i][nx] = (Aw*pp[i][nx-1]+b)/Ap
+      
     print 'pp', iter    
   for i in range(1,ny):
     for j in range(1,nx):
